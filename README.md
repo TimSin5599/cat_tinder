@@ -9,7 +9,7 @@
 3. Счетчик понравившихся котов
 4. Кнопки для лайка и дизлайка
 
-APK файл: https://github.com/TimSin5599/cat_tinder/releases/download/Release/app-release.apk
+APK файл: https://github.com/TimSin5599/cat_tinder/releases/download/Release2/app-release.apk
 
 <p align="center">
     <img src="assets/images/simulator_screenshot_AC7C0E64-E3B8-41B8-86D5-38F9D0C708F0.png" width="200">
