@@ -18,7 +18,7 @@ class LikeDislikeButton extends StatelessWidget {
       heroTag: null,
       backgroundColor: color,
       onPressed: onPressed,
-      child: Icon(icon, color: Colors.white, size: 30),
+      child: Icon(icon, color: Colors.deepPurple, size: 30),
     );
   }
 }

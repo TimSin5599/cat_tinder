@@ -1,6 +1,6 @@
 # Cat Tinder
 
-Приложение, для поиска кошечек
+Приложение, для поиска котиков
 
 Реализованные фичи:
     
@@ -8,9 +8,19 @@
 2. Детальное окно с описанием
 3. Счетчик понравившихся котов
 4. Кнопки для лайка и дизлайка
+5. Экран понравившихся котиков (+фильтрация, удаление)
+6. При длительной загрузке отображается CircleProgressBar
+7. При ошибке сети отображается AlertDialog
 
-![simulator_screenshot_AC7C0E64-E3B8-41B8-86D5-38F9D0C708F0.png](assets/images/simulator_screenshot_AC7C0E64-E3B8-41B8-86D5-38F9D0C708F0.png)
-![simulator_screenshot_B7CEE069-3CDD-4C39-8159-FC585D21D0B5.png](assets/images/simulator_screenshot_B7CEE069-3CDD-4C39-8159-FC585D21D0B5.png)
+![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.08.55.png](assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.08.55.png)
+![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.09.20.png](assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.09.20.png)
+![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.09.32.png](assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.09.32.png)
+![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.09.38.png](assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.09.38.png)
+![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.10.05.png](assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.10.05.png)
+![error_internet.png](assets/images/error_internet.png)
+
+APK: 
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

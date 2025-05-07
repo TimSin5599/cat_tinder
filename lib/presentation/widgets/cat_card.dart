@@ -1,7 +1,7 @@
-import 'package:cat_tinder/widgets/like_dislike_button.dart';
+import 'package:cat_tinder/presentation/widgets/like_dislike_button.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../models/cat.dart';
+import 'package:cat_tinder/domain/models/cat.dart';
 
 class CatCard extends StatelessWidget {
   final Cat cat;
@@ -49,7 +49,7 @@ class CatCard extends StatelessWidget {
               left: 10,
               right: 10,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Container(
                   padding: const EdgeInsets.symmetric(
                     vertical: 8,
@@ -88,12 +88,12 @@ class CatCard extends StatelessWidget {
                 children: [
                   LikeDislikeButton(
                     icon: Icons.close,
-                    color: Colors.red,
+                    color: Colors.white,
                     onPressed: onDislike,
                   ),
                   LikeDislikeButton(
                     icon: Icons.favorite,
-                    color: Colors.green,
+                    color: Colors.white,
                     onPressed: onLike,
                   ),
                 ],

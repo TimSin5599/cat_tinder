@@ -5,8 +5,10 @@ class Cat {
   final String breed;
   final String description;
   final String temperament;
+  DateTime? likedAt;
 
   Cat({
+    this.likedAt,
     required this.id,
     required this.imageUrl,
     required this.name,
