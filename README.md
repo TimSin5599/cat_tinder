@@ -1,4 +1,4 @@
-# Cat Tinder
+# CatTinder PRO
 
 Приложение, для поиска котиков
 
