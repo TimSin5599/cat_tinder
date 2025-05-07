@@ -12,14 +12,23 @@
 6. При длительной загрузке отображается CircleProgressBar
 7. При ошибке сети отображается AlertDialog
 
-![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.08.55.png](assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.08.55.png)
-![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.09.20.png](assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.09.20.png)
-![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.09.32.png](assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.09.32.png)
-![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.09.38.png](assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.09.38.png)
-![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.10.05.png](assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.10.05.png)
-![error_internet.png](assets/images/error_internet.png)
+[//]: # (![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.08.55.png]&#40;assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.08.55.png&#41;)
+[//]: # (![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.09.20.png]&#40;assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.09.20.png&#41;)
+[//]: # (![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.09.32.png]&#40;assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.09.32.png&#41;)
+[//]: # (![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.09.38.png]&#40;assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.09.38.png&#41;)
+[//]: # (![Simulator Screenshot - iPhone 16 Pro - 2025-05-07 at 13.10.05.png]&#40;assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.10.05.png&#41;)
+[//]: # (![error_internet.png]&#40;assets/images/error_internet.png&#41;)
 
-APK: 
+<p align="center">
+    <img src="assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.08.55.png" width="200">
+    <img src="assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.09.20.png" width="200">
+    <img src="assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.09.32.png" width="200">
+    <img src="assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.09.38.png" width="200">
+    <img src="assets/images/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-05-07%20at%2013.10.05.png" width="200">
+    <img src="assets/images/error_internet.png" width="200">
+<p>
+
+APK: https://github.com/TimSin5599/cat_tinder/releases/download/v1.0.2/app-release.apk
 
 ## Getting Started
 
