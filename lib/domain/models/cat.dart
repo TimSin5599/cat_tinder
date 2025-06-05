@@ -32,4 +32,28 @@ class Cat {
       temperament: breedData != null ? breedData['temperament'] : 'Unknown',
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'url': imageUrl,
+      'name': name,
+      'breed': breed,
+      'description': description,
+      'temperament': temperament,
+      'likedAt': likedAt?.toIso8601String(),
+    };
+  }
+
+  factory Cat.fromLocalJson(Map<String, dynamic> json) {
+    return Cat(
+      id: json['id'],
+      imageUrl: json['url'],
+      name: json['name'],
+      breed: json['breed'],
+      description: json['description'],
+      temperament: json['temperament'],
+      likedAt: json['likedAt'] != null ? DateTime.parse(json['likedAt']) : null,
+    );
+  }
 }

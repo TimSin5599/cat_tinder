@@ -14,6 +14,8 @@ class SwipeScreen extends StatefulWidget {
 
 class SwipeScreenState extends State<SwipeScreen> {
   final CardSwiperController _controller = CardSwiperController();
+  bool _isDialogCancelled = false;
+  bool _snackBarShown = false;
 
   @override
   void initState() {
@@ -29,6 +31,16 @@ class SwipeScreenState extends State<SwipeScreen> {
       body: ListenableBuilder(
         listenable: swipeHandler,
         builder: (BuildContext context, Widget? child) {
+          if (!swipeHandler.hasInternetVar &&
+              !_isDialogCancelled &&
+              !_snackBarShown) {
+            _snackBarShown =
+                true; // чтобы не показывался снова при перестроении
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              _showNoInternetSnackBar(context, swipeHandler);
+            });
+          }
+
           return Stack(
             children: [
               swipeHandler.catCards.isEmpty
@@ -92,46 +104,44 @@ class SwipeScreenState extends State<SwipeScreen> {
                       ],
                     ),
                   ),
-              if (!swipeHandler.hasInternetVar)
-                Center(
-                  child: AlertDialog(
-                    title: const Text("Нет интернета"),
-                    content: const Text("Проверьте подключение к сети."),
-                    actions: [
-                      TextButton(
-                        onPressed: () async {
-                          swipeHandler.initialize();
-                          setState(() {});
-                        },
-                        child: const Text("Повторить"),
-                      ),
-                    ],
-                  ),
-                ),
+
+              // if (!swipeHandler.hasInternetVar && !_isDialogCancelled) _showNoInternetDialog(context, swipeHandler)
             ],
           );
         },
       ),
     );
   }
-}
 
-// FutureBuilder(
-//     future: hasInternet(),
-//     builder: (context, snapshot) {
-//       if (snapshot.connectionState == ConnectionState.waiting) {
-//         return const Center(
-//             child: CircularProgressIndicator());
-//       } else if (snapshot.hasError) {
-//         return const Center(child: Text('Ошибка при проверке интернета'));
-//       } else if (!(snapshot.data ?? false)) {
-//         return NoInternetScreen(
-//                 onRetry: () async {
-//                   widget.swipeHandler.initialize();
-//                 },
-//               );
-//       } else {
-//
-//       }
-//     }
-// )
+  void _showNoInternetSnackBar(
+    BuildContext context,
+    SwipeHandler swipeHandler,
+  ) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text("Нет интернета. Проверьте подключение."),
+        duration: const Duration(seconds: 5),
+        action: SnackBarAction(
+          label: "Повторить",
+          onPressed: () {
+            swipeHandler.initialize();
+            setState(() {
+              _snackBarShown = false;
+            });
+          },
+        ),
+      ),
+    );
+
+    setState(() {
+      _isDialogCancelled = true;
+    });
+
+    Future.delayed(const Duration(seconds: 15), () {
+      setState(() {
+        _isDialogCancelled = false;
+        _snackBarShown = false;
+      });
+    });
+  }
+}

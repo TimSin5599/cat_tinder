@@ -13,11 +13,13 @@ class LikeScreen extends StatefulWidget {
 
 class _LikeScreenState extends State<LikeScreen> {
   late SwipeHandler swipeHandler;
+  List<Cat> likedCats = [];
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     swipeHandler = Provider.of<SwipeHandler>(context);
+    _loadLikedCats();
   }
 
   String selectedBreed = 'Все';
@@ -27,9 +29,15 @@ class _LikeScreenState extends State<LikeScreen> {
     return ['Все', ...breeds];
   }
 
+  Future<void> _loadLikedCats() async {
+    final cats = await swipeHandler.getLikedCats();
+    setState(() {
+      likedCats = cats;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final List<Cat> likedCats = swipeHandler.likedCats;
     final breeds = getBreeds(likedCats);
 
     final filteredCats =

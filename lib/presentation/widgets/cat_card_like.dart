@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:cat_tinder/domain/models/cat.dart';
 
@@ -20,7 +21,14 @@ class CatCardLike extends StatelessWidget {
               child: Stack(
                 children: [
                   Positioned.fill(
-                    child: Image.network(cat.imageUrl, fit: BoxFit.cover),
+                    child: CachedNetworkImage(
+                      imageUrl: cat.imageUrl,
+                      placeholder:
+                          (context, url) => const CircularProgressIndicator(),
+                      errorWidget:
+                          (context, url, error) => const Icon(Icons.error),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   Positioned(
                     top: 8,

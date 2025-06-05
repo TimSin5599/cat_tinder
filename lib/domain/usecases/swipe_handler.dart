@@ -1,14 +1,17 @@
-import 'package:cat_tinder/data/api/cat_repository.dart';
+import 'dart:convert';
+
+import 'package:cat_tinder/data/api/cat_api_service.dart';
+import 'package:cat_tinder/data/api/cat_repository_impl.dart';
 import 'package:cat_tinder/domain/models/cat.dart';
 import 'package:cat_tinder/domain/usecases/check_connection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SwipeHandler with ChangeNotifier {
   final List<Cat> _catCards = [];
   final List<Cat> _catWaitCards = [];
-  final CatRepository _catRepository = CatRepository();
-  final List<Cat> _likedCats = [];
+  final CatRepositoryImpl _catRepository = CatRepositoryImpl(CatApiService());
   bool _hasInternet = true;
   int _counter = 0;
 
@@ -19,34 +22,28 @@ class SwipeHandler with ChangeNotifier {
   int get counter => _counter;
   List<Cat> get catCards => _catCards;
   bool get hasInternetVar => _hasInternet;
-  List<Cat> get likedCats => _likedCats;
 
   Future<void> loadNewCat(List<Cat> array) async {
-    List<Cat> newCats = [];
-    for (int i = 0; i < 5; ++i) {
-      final cat = await _catRepository.fetchRandomCats();
-      _hasInternet = await updateInternetStatus();
-      notifyListeners();
-      if (cat != null) {
-        newCats.add(cat);
-      }
-    }
-
+    _hasInternet = await updateInternetStatus();
+    List<Cat> newCats = await _catRepository.fetchRandomCats();
+    notifyListeners();
     array.addAll(newCats);
     notifyListeners();
   }
 
   void initialize() async {
     _catCards.clear();
+    List<Cat> likedCats = await getLikedCats();
+    _counter = likedCats.length;
     await loadNewCat(_catCards);
     await loadNewCat(_catCards);
     await loadNewCat(_catWaitCards);
   }
 
-  void updateList(int index) {
-    _catCards.replaceRange(index, index + _catWaitCards.length, _catWaitCards);
+  void updateList(int index) async {
+    _catCards.replaceRange(index, index + 5, _catWaitCards);
     _catWaitCards.clear();
-    loadNewCat(_catWaitCards);
+    await loadNewCat(_catWaitCards);
   }
 
   Future<bool> updateInternetStatus() async {
@@ -55,9 +52,6 @@ class SwipeHandler with ChangeNotifier {
   }
 
   void handleSwipe(CardSwiperDirection direction) async {
-    if (direction == CardSwiperDirection.right) {
-      _counter++;
-    }
     _hasInternet = await updateInternetStatus();
     notifyListeners();
   }
@@ -67,15 +61,16 @@ class SwipeHandler with ChangeNotifier {
     int? currentIndex,
     CardSwiperDirection direction,
   ) {
-    if (currentIndex == catCards.length / 2 ||
-        currentIndex == catCards.length) {
-      updateList(currentIndex! - 5);
+    if (previousIndex == 4) {
+      updateList(0);
+    } else if (currentIndex == 0) {
+      updateList(5);
     }
 
     if (direction == CardSwiperDirection.right) {
       Cat cat = _catCards[previousIndex];
       cat.likedAt = DateTime.now();
-      _likedCats.add(cat);
+      addLikedCat(cat);
     }
 
     handleSwipe(direction);
@@ -92,8 +87,37 @@ class SwipeHandler with ChangeNotifier {
     return true;
   }
 
-  void removeLikedCat(Cat cat) {
-    _likedCats.remove(cat);
+  Future<void> removeLikedCat(Cat cat) async {
+    final likedCats = await getLikedCats();
+    likedCats.removeWhere((c) => c.id == cat.id);
+    await saveLikedCats(likedCats);
+  }
+
+  Future<void> addLikedCat(Cat cat) async {
+    final List<Cat> likedCats = await getLikedCats();
+
+    if (likedCats.any((c) => c.id == cat.id)) return;
+
+    cat.likedAt = DateTime.now();
+    likedCats.add(cat);
+    saveLikedCats(likedCats);
+  }
+
+  Future<void> saveLikedCats(List<Cat> cats) async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonString = jsonEncode(cats.map((cat) => cat.toJson()).toList());
+    await prefs.setString('liked_cats', jsonString);
+    _counter = cats.length;
     notifyListeners();
+  }
+
+  Future<List<Cat>> getLikedCats() async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonString = prefs.getString('liked_cats');
+
+    if (jsonString == null) return [];
+
+    final List<dynamic> decoded = jsonDecode(jsonString);
+    return decoded.map((json) => Cat.fromLocalJson(json)).toList();
   }
 }

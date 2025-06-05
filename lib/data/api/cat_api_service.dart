@@ -8,19 +8,19 @@ class CatApiService {
   static final String? _baseUrl = dotenv.env['BASE_URL'];
   static final String? _apiKey = dotenv.env['API_URL'];
 
-  static Future<Cat?> fetchRandomCat() async {
-    // debugPrint(_baseUrl);
-    // debugPrint(_apiKey);
+  Future<List<Cat>> fetchRandomCat() async {
     try {
       final response = await http.get(
-        Uri.parse('$_baseUrl?has_breeds=1&limit=1'),
+        Uri.parse('$_baseUrl?has_breeds=1&limit=5'),
         headers: {'x-api-key': _apiKey!},
       );
 
       if (response.statusCode == 200) {
         final List<dynamic> data = jsonDecode(response.body);
         if (data.isNotEmpty) {
-          return Cat.fromJson(data[0]);
+          return data
+              .map((json) => Cat.fromJson(json as Map<String, dynamic>))
+              .toList();
         } else {
           throw Exception('Ошибка загрузки данных');
         }
@@ -29,7 +29,7 @@ class CatApiService {
       }
     } catch (e) {
       debugPrint("Ошибка: $e");
-      return null;
+      return [];
     }
   }
 }
